@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "${modId}",
+  "version": "${version}",
+
+  "name": "Kotlin Library Extensions",
+  "description": "Adds additional Kotlin libraries.",
+  "authors": [
+    "FrozenBlock"
+  ],
+  "contact": {
+    "homepage": "https://github.com/FrozenBlock/Fabric-Kotlin-Libraries",
+    "sources": "https://github.com/FrozenBlock/Fabric-Kotlin-Libraries",
+    "issues": "https://github.com/FrozenBlock/Fabric-Kotlin-Libraries/issues"
+  },
+  "license": "MIT",
+  "environment": "*",
+
+  "depends": {
+    "fabric-language-kotlin": "*"
+  },
+
+  "custom": {
+    "modmenu": {
+      "links": {
+        "modmenu.discord": "https://discord.gg/EpkBWm844s"
+      },
+      "badges": [
+        "library",
+        "frozenblock"
+      ]
+    }
+  }
+}
