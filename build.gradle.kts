@@ -270,16 +270,18 @@ val modrinth_id: String by extra
 val release_type: String by extra
 val changelog_file: String by extra
 
-val modrinth_version = makeModrinthVersion(modVersion)
-val display_name = makeName(modVersion)
-val changelog_text = getChangelog(file(changelog_file))
+val modrinthVersion = makeModrinthVersion(modVersion)
+val displayName = makeName(modVersion)
+val changelogText = getChangelog(file(changelog_file))
 
 fun makeName(version: String): String {
-    return "$version (${minecraftVersion})"
+    return version
+    //return "$version (${minecraftVersion})"
 }
 
 fun makeModrinthVersion(version: String): String {
-    return "$version-mc${minecraftVersion}"
+    return version
+    //return "$version-mc${minecraftVersion}"
 }
 
 fun getChangelog(changelogFile: File): String {
@@ -308,10 +310,10 @@ fun getBranch(): String {
 modrinth {
     token.set(System.getenv("MODRINTH_TOKEN"))
     projectId.set(modrinth_id)
-    versionNumber.set(modrinth_version)
-    versionName.set(display_name)
+    versionNumber.set(modrinthVersion)
+    versionName.set(displayName)
     versionType.set(release_type)
-    changelog.set(changelog_text)
+    changelog.set(changelogText)
     uploadFile.set(file("build/libs/${tasks.remapJar.get().archiveBaseName.get()}-${version}.jar"))
     gameVersions.set(supportedMcVersions)
     loaders.set(listOf("fabric", "quilt"))
@@ -333,7 +335,7 @@ val github by tasks.register("github") {
 
         val releaseBuilder = GHReleaseBuilder(repository, makeModrinthVersion(modVersion))
         releaseBuilder.name(makeName(modVersion))
-        releaseBuilder.body(changelog_text)
+        releaseBuilder.body(changelogText)
         releaseBuilder.commitish(getBranch())
         releaseBuilder.prerelease(release_type != "release")
 
