@@ -56,6 +56,17 @@ val supportedMcVersions: List<String> = listOf(
     "1.20.1"
 )
 
+val includeApi: Configuration by configurations.creating
+
+configurations {
+    api {
+        extendsFrom(includeApi)
+    }
+    include {
+        extendsFrom(includeApi)
+    }
+}
+
 repositories {
     maven("https://jitpack.io")
     maven("https://maven.parchmentmc.org")
@@ -78,7 +89,7 @@ dependencies {
 
     // don't shadow the kotlin libraries because it errors on build time for some reason
     // instead use this module that isn't connected to fabric loom whatsoever
-    api("net.frozenblock:kotlinlibraryextensions:1.0")?.let { include(it) } // fulfilled by includeBuild
+    includeApi("net.frozenblock:kotlinlibraryextensions:1.0") // fulfilled by includeBuild
 }
 
 kotlin {

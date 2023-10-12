@@ -43,5 +43,7 @@ jobs:
           key: ${{ runner.os }}-gradle-#{{ hashFiles('**/gradle-wrapper.properties') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
+      - name: Build Library
+        run: ./gradlew :library:build
       - name: Publish to Modrinth
         run: ./gradlew publishMod -PreleaseType=stable -PuseThirdPartyMods=false

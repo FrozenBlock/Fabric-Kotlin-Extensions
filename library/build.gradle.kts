@@ -8,10 +8,10 @@ plugins {
     kotlin("jvm") version("1.9.10")
 }
 
-val modId: String by rootProject
-val projectVersion: String by rootProject
-val mavenGroup: String by rootProject
-val baseName: String by rootProject
+val modId: String by project
+val projectVersion: String by project
+val mavenGroup: String by project
+val baseName: String by project
 
 base {
     archivesName = baseName

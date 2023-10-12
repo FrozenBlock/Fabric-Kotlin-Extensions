@@ -37,6 +37,8 @@ jobs:
       - name: Make Gradle Wrapper Executable
         if: ${{ runner.os != 'Windows' }}
         run: chmod +x ./gradlew
+      - name: Build Library
+        run: ./gradlew :library:build
       - name: Build
         run: ./gradlew build -PuseThirdPartyMods=false
       - name: Extract current branch name
