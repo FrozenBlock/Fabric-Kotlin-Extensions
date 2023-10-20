@@ -30,6 +30,8 @@ dependencies {
     shadowInclude(kotlin("scripting-jvm"))
     shadowInclude(kotlin("scripting-jvm-host"))
     shadowInclude(kotlin("scripting-jsr223"))
+    shadowInclude(kotlin("scripting-dependencies"))
+    shadowInclude(kotlin("scripting-dependencies-maven"))
 }
 
 kotlin {
