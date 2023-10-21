@@ -4,5 +4,5 @@ Make sure to clear after release
 
 Put changelog here:
 -----------------
-- Added `kotlin-scripting-dependencies`
-- Added `kotlin-scripting-dependencies-maven`
+- Fixed duplicate guava dependency error
+- Reduced file size by excluding libraries already in Minecraft

@@ -58,6 +58,14 @@ tasks {
             exclude(dependency("org.jetbrains.kotlinx:kotlinx-serialization-cbor-jvm:.*"))
             exclude(dependency("org.jetbrains.kotlinx:atomicfu-jvm:.*"))
             exclude(dependency("org.jetbrains.kotlinx:kotlinx-datetime-jvm:.*"))
+
+            exclude(dependency("com.google.guava:guava:.*"))
+
+            exclude(dependency("org.apache.commons:commons-lang3:.*"))
+            exclude(dependency("org.apache.httpcomponents:httpclient:.*"))
+            exclude(dependency("org.apache.httpcomponents:httpcore:.*"))
+            exclude(dependency("org.slf4j:slf4j-api:.*"))
+            exclude(dependency("org.slf4j:slf4j-simple:.*"))
         }
     }
 
