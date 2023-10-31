@@ -90,7 +90,7 @@ dependencies {
         }
     })
 
-    modImplementation("net.fabricmc:fabric-language-kotlin:$fabricKotlinVersion")
+    modApi("net.fabricmc:fabric-language-kotlin:$fabricKotlinVersion")
 
     // don't shadow the kotlin libraries because it errors on build time for some reason
     // instead use this module that isn't connected to fabric loom whatsoever
@@ -107,6 +107,7 @@ tasks {
         val properties = HashMap<String, Any>()
         properties["modId"] = modId
         properties["version"] = version
+        properties["fabricKotlinVersion"] = ">=$fabricKotlinVersion"
 
         properties.forEach { (a, b) -> inputs.property(a, b) }
 

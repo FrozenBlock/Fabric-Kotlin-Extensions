@@ -17,7 +17,7 @@
   "environment": "*",
 
   "depends": {
-    "fabric-language-kotlin": "*"
+    "fabric-language-kotlin": "${fabricKotlinVersion}"
   },
 
   "custom": {

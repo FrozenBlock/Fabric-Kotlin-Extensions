@@ -4,5 +4,5 @@ Make sure to clear after release
 
 Put changelog here:
 -----------------
-- Fixed duplicate guava dependency error
-- Reduced file size by excluding libraries already in Minecraft
+- Updated Kotlin to 1.9.20
+- Updated minimum FLK to 1.10.11

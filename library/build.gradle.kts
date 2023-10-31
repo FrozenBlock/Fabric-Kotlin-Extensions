@@ -13,6 +13,8 @@ val projectVersion: String by project
 val mavenGroup: String by project
 val baseName: String by project
 
+val fabricKotlinVersion: String by project
+
 base {
     archivesName = baseName
 }
@@ -78,6 +80,7 @@ tasks {
         val properties = HashMap<String, Any>()
         properties["modId"] = modId
         properties["version"] = version
+        properties["fabricKotlinVersion"] = ">=$fabricKotlinVersion"
 
         properties.forEach { (a, b) -> inputs.property(a, b) }
 
