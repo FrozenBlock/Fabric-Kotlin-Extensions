@@ -26,6 +26,7 @@ val shadowInclude: Configuration by configurations.creating
 
 repositories {
     mavenCentral()
+    maven("https://maven.fabricmc.net")
 }
 
 dependencies {
@@ -34,6 +35,10 @@ dependencies {
     shadowInclude(kotlin("scripting-jsr223"))
     shadowInclude(kotlin("scripting-dependencies"))
     shadowInclude(kotlin("scripting-dependencies-maven"))
+
+    shadowInclude("net.fabricmc:mapping-io:0.4.2")
+    shadowInclude("net.fabricmc:mercury:0.4.0")
+    shadowInclude("net.fabricmc:lorenz-tiny:4.0.2")
 }
 
 kotlin {
