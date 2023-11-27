@@ -5,7 +5,7 @@ plugins {
     `java-library`
     java
     id("com.github.johnrengelman.shadow") version("+")
-    kotlin("jvm") version("1.9.20")
+    kotlin("jvm") version("1.9.21")
 }
 
 val modId: String by project
@@ -36,9 +36,8 @@ dependencies {
     shadowInclude(kotlin("scripting-dependencies"))
     shadowInclude(kotlin("scripting-dependencies-maven"))
 
-    shadowInclude("net.fabricmc:mapping-io:0.4.2")
-    shadowInclude("net.fabricmc:mercury:0.4.0")
-    shadowInclude("net.fabricmc:lorenz-tiny:4.0.2")
+    shadowInclude("net.fabricmc:mapping-io:0.5.0")
+    shadowInclude("net.fabricmc:tiny-remapper:0.8.9")
 }
 
 kotlin {

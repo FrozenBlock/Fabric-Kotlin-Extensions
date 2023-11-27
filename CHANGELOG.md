@@ -5,7 +5,5 @@ Make sure to clear after release
 Put changelog here:
 
 -----------------
-- Added new libraries by FabricMC
-    - Mapping IO
-    - Mercury
-    - Lorenz Tiny
+- Removed Fabric Lorenz
+- Updated Mapping IO to 0.5.0
