@@ -72,6 +72,7 @@ tasks {
             exclude(dependency("org.apache.httpcomponents:httpcore:.*"))
             exclude(dependency("org.slf4j:slf4j-api:.*"))
             exclude(dependency("org.slf4j:slf4j-simple:.*"))
+            exclude(dependency("org.ow2.asm:.*:.*"))
         }
     }
 
