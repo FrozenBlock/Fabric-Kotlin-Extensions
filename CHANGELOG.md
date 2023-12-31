@@ -5,5 +5,7 @@ Make sure to clear after release
 Put changelog here:
 
 -----------------
-- Updated to Kotlin 1.9.22
+- Updated Kotlin to 1.9.22
+- Updated Mapping IO to 0.5.1
+- Updated Tiny Remapper to 0.9.0
 - Updated required FLK to 1.10.17
