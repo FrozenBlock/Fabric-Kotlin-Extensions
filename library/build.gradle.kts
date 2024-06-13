@@ -5,7 +5,7 @@ plugins {
     `java-library`
     java
     id("com.github.johnrengelman.shadow") version("+")
-    kotlin("jvm") version("1.9.24")
+    kotlin("jvm") version("2.0.0")
 }
 
 val modId: String by project
