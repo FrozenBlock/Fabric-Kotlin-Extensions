@@ -4,8 +4,8 @@ plugins {
     idea
     `java-library`
     java
-    id("com.github.johnrengelman.shadow") version("+")
-    kotlin("jvm") version("2.0.10")
+    id("com.gradleup.shadow") version("+")
+    kotlin("jvm") version("2.0.21")
 }
 
 val modId: String by project
