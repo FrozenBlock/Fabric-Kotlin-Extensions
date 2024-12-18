@@ -30,8 +30,6 @@ repositories {
 }
 
 dependencies {
-    shadowInclude("org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.9.0")
-
     shadowInclude(kotlin("scripting-jvm"))
     shadowInclude(kotlin("scripting-jvm-host"))
     shadowInclude(kotlin("scripting-jsr223"))
