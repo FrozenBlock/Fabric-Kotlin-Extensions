@@ -5,7 +5,7 @@ plugins {
     `java-library`
     java
     id("com.gradleup.shadow") version("+")
-    kotlin("jvm") version("2.0.21")
+    kotlin("jvm") version("2.1.0")
 }
 
 val modId: String by project
@@ -35,6 +35,7 @@ dependencies {
     shadowInclude(kotlin("scripting-jsr223"))
     shadowInclude(kotlin("scripting-dependencies"))
     shadowInclude(kotlin("scripting-dependencies-maven"))
+    shadowInclude(kotlin("metadata-jvm"))
 
     shadowInclude("net.fabricmc:mapping-io:0.6.1")
     shadowInclude("net.fabricmc:tiny-remapper:0.10.4")

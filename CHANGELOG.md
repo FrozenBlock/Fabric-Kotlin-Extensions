@@ -5,6 +5,5 @@ Make sure to clear after release
 Put changelog here:
 
 -----------------
-- Updated Kotlin to 2.1.0
-- Removed legacy `kotlinx-metadata-jvm` library
-- Updated minimum FLK to 1.13.0+kotlin.2.1.0
+- Fixed the upgrade to Kotlin 2.1.0
+- Added the stable `kotlin-metadata-jvm` library
