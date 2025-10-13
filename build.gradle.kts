@@ -53,8 +53,8 @@ version = getVersion()
 group = mavenGroup
 
 val supportedMcVersions: List<String> = listOf(
-    "1.21.6", "1.21.5", "1.21.4", "1.21.3", "1.21.2", "1.21.1", "1.21",
-    "1.20.6", "1.20.5", "1.20.4", "1.20.2", "1.20.1", "1.20",
+    "1.21.9", "1.21.8", "1.21.7", "1.21.6", "1.21.5", "1.21.4", "1.21.3", "1.21.2", "1.21.1", "1.21",
+    "1.20.6", "1.20.5", "1.20.4", "1.20.3", "1.20.2", "1.20.1", "1.20",
     "1.19.4", "1.19.3", "1.19.2", "1.19.1", "1.19",
     "1.18.2", "1.18.1", "1.18",
     "1.17.1", "1.17",
@@ -85,7 +85,7 @@ dependencies {
     minecraft("com.mojang:minecraft:$minecraftVersion")
     mappings(loom.layered {
         // please annoy treetrain if this doesnt work
-        mappings("org.quiltmc:quilt-mappings:$quiltMappings:intermediary-v2")
+        //mappings("org.quiltmc:quilt-mappings:$quiltMappings:intermediary-v2")
         //parchment("org.parchmentmc.data:parchment-$parchmentMappings@zip")
         officialMojangMappings {
             nameSyntheticMembers = false
