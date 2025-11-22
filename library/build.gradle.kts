@@ -37,8 +37,8 @@ dependencies {
     shadowInclude(kotlin("scripting-dependencies-maven"))
     shadowInclude(kotlin("metadata-jvm"))
 
-    shadowInclude("net.fabricmc:mapping-io:0.6.1")
-    shadowInclude("net.fabricmc:tiny-remapper:0.10.4")
+    shadowInclude("net.fabricmc:mapping-io:0.8.0")
+    shadowInclude("net.fabricmc:tiny-remapper:0.12.0")
 }
 
 kotlin {
