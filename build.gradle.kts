@@ -21,7 +21,7 @@ buildscript {
 }
 
 plugins {
-    id("fabric-loom") version("1.13-SNAPSHOT")
+    id("fabric-loom") version("1.14-SNAPSHOT")
     id("org.ajoberstar.grgit") version("+")
     id("com.modrinth.minotaur") version("+")
     `maven-publish`
@@ -29,7 +29,7 @@ plugins {
     idea
     `java-library`
     java
-    kotlin("jvm") version("2.2.21")
+    kotlin("jvm") version("2.3.0")
 }
 
 val minecraftVersion: String by project
@@ -51,7 +51,8 @@ version = getVersion()
 group = mavenGroup
 
 val supportedMcVersions: List<String> = listOf(
-    "1.21.10", "1.21.9", "1.21.8", "1.21.7", "1.21.6", "1.21.5", "1.21.4", "1.21.3", "1.21.2", "1.21.1", "1.21",
+    "26.1-snapshot-1",
+    "1.21.11", "1.21.10", "1.21.9", "1.21.8", "1.21.7", "1.21.6", "1.21.5", "1.21.4", "1.21.3", "1.21.2", "1.21.1", "1.21",
     "1.20.6", "1.20.5", "1.20.4", "1.20.3", "1.20.2", "1.20.1", "1.20",
     "1.19.4", "1.19.3", "1.19.2", "1.19.1", "1.19",
     "1.18.2", "1.18.1", "1.18",
@@ -158,9 +159,9 @@ tasks {
     }
 }
 
-val remapJar: Task by tasks
-val sourcesJar: Task by tasks
-val javadocJar: Task by tasks
+val jar: Jar by tasks
+val sourcesJar: Jar by tasks
+val javadocJar: Jar by tasks
 
 java {
     sourceCompatibility = JavaVersion.VERSION_21
@@ -322,14 +323,14 @@ modrinth {
     versionName.set(displayName)
     versionType.set(release_type)
     changelog.set(changelogText)
-    uploadFile.set(file("build/libs/${tasks.remapJar.get().archiveBaseName.get()}-${version}.jar"))
+    uploadFile.set(file("build/libs/${tasks.jar.get().archiveBaseName.get()}-${version}.jar"))
     gameVersions.set(supportedMcVersions)
     loaders.set(listOf("fabric", "quilt"))
 }
 
 
 val github by tasks.register("github") {
-    dependsOn(remapJar)
+    dependsOn(jar)
     val env = System.getenv()
     val token = env["GITHUB_TOKEN"]
     val repoVar = env["GITHUB_REPOSITORY"]
@@ -348,8 +349,8 @@ val github by tasks.register("github") {
         releaseBuilder.prerelease(release_type != "release")
 
         val ghRelease = releaseBuilder.create()
-        ghRelease.uploadAsset(tasks.remapJar.get().archiveFile.get().asFile, "application/java-archive")
-        ghRelease.uploadAsset(tasks.remapSourcesJar.get().archiveFile.get().asFile, "application/java-archive")
+        ghRelease.uploadAsset(jar.archiveFile.get().asFile, "application/java-archive")
+        ghRelease.uploadAsset(sourcesJar.archiveFile.get().asFile, "application/java-archive")
         ghRelease.uploadAsset(javadocJar.outputs.files.singleFile, "application/java-archive")
     }
 }

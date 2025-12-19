@@ -1,3 +1,6 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     `maven-publish`
     eclipse
@@ -5,7 +8,7 @@ plugins {
     `java-library`
     java
     id("com.gradleup.shadow") version("+")
-    kotlin("jvm") version("2.2.20")
+    kotlin("jvm") version("2.3.0")
 }
 
 val modId: String by project
@@ -43,6 +46,28 @@ dependencies {
 
 kotlin {
     explicitApi()
+}
+
+tasks {
+    withType(JavaCompile::class) {
+        options.encoding = "UTF-8"
+        // Minecraft 1.20.5 (24w14a) upwards uses Java 21.
+        options.release.set(21)
+        options.isFork = true
+        options.isIncremental = true
+    }
+
+    withType(KotlinCompile::class) {
+        compilerOptions {
+            // Minecraft 1.20.5 (24w14a) upwards uses Java 21.
+            jvmTarget.set(JvmTarget.JVM_21)
+        }
+    }
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
 }
 
 tasks {
