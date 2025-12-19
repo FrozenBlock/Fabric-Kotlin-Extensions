@@ -158,7 +158,7 @@ tasks {
     }
 }
 
-val remapJar: Jar by tasks
+val remapJar: AbstractArchiveTask by tasks
 val remapSourcesJar: AbstractArchiveTask by tasks
 val javadocJar: Jar by tasks
 
