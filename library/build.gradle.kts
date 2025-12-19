@@ -29,7 +29,6 @@ val shadowInclude: Configuration by configurations.creating
 
 repositories {
     mavenCentral()
-    maven("https://maven.fabricmc.net")
 }
 
 dependencies {
@@ -39,9 +38,6 @@ dependencies {
     shadowInclude(kotlin("scripting-dependencies"))
     shadowInclude(kotlin("scripting-dependencies-maven"))
     shadowInclude(kotlin("metadata-jvm"))
-
-    shadowInclude("net.fabricmc:mapping-io:0.8.0")
-    shadowInclude("net.fabricmc:tiny-remapper:0.12.0")
 }
 
 kotlin {
@@ -51,23 +47,23 @@ kotlin {
 tasks {
     withType(JavaCompile::class) {
         options.encoding = "UTF-8"
-        // Minecraft 1.20.5 (24w14a) upwards uses Java 21.
-        options.release.set(21)
+        // Minecraft 26.1 (26.1-snapshot-1) upwards uses Java 25.
+        options.release.set(25)
         options.isFork = true
         options.isIncremental = true
     }
 
     withType(KotlinCompile::class) {
         compilerOptions {
-            // Minecraft 1.20.5 (24w14a) upwards uses Java 21.
-            jvmTarget.set(JvmTarget.JVM_21)
+            // Minecraft 26.1 (26.1-snapshot-1) upwards uses Java 25.
+            jvmTarget.set(JvmTarget.JVM_25)
         }
     }
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_21
-    targetCompatibility = JavaVersion.VERSION_21
+    sourceCompatibility = JavaVersion.VERSION_25
+    targetCompatibility = JavaVersion.VERSION_25
 }
 
 tasks {

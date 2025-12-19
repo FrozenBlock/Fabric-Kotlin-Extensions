@@ -17,7 +17,8 @@
   "environment": "*",
 
   "depends": {
-    "fabric-language-kotlin": "${fabricKotlinVersion}"
+    "fabric-language-kotlin": "${fabricKotlinVersion}",
+    "java": ">=25"
   },
   "custom": {
     "modmenu": {
