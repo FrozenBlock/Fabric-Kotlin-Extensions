@@ -155,7 +155,7 @@ java {
     sourceCompatibility = JavaVersion.VERSION_25
     targetCompatibility = JavaVersion.VERSION_25
 
-    // Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
+    // Loom will automatically attach sourcesJar to a SourcesJar task and to the "build" task
     // if it is present.
     // If you remove this line, sources will not be generated.
     withSourcesJar()
