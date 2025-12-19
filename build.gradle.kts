@@ -158,8 +158,8 @@ tasks {
     }
 }
 
-val jar: Jar by tasks
-val sourcesJar: Jar by tasks
+val remapJar: Jar by tasks
+val remapSourcesJar: AbstractArchiveTask by tasks
 val javadocJar: Jar by tasks
 
 java {
@@ -182,7 +182,7 @@ tasks {
 }
 
 artifacts {
-    archives(sourcesJar)
+    archives(remapSourcesJar)
     archives(javadocJar)
 }
 
@@ -322,14 +322,14 @@ modrinth {
     versionName.set(displayName)
     versionType.set(release_type)
     changelog.set(changelogText)
-    uploadFile.set(file("build/libs/${tasks.jar.get().archiveBaseName.get()}-${version}.jar"))
+    uploadFile.set(file("build/libs/${tasks.remapJar.get().archiveBaseName.get()}-${version}.jar"))
     gameVersions.set(supportedMcVersions)
     loaders.set(listOf("fabric", "quilt"))
 }
 
 
 val github by tasks.register("github") {
-    dependsOn(jar)
+    dependsOn(remapJar)
     val env = System.getenv()
     val token = env["GITHUB_TOKEN"]
     val repoVar = env["GITHUB_REPOSITORY"]
@@ -348,8 +348,8 @@ val github by tasks.register("github") {
         releaseBuilder.prerelease(release_type != "release")
 
         val ghRelease = releaseBuilder.create()
-        ghRelease.uploadAsset(jar.archiveFile.get().asFile, "application/java-archive")
-        ghRelease.uploadAsset(sourcesJar.archiveFile.get().asFile, "application/java-archive")
+        ghRelease.uploadAsset(remapJar.archiveFile.get().asFile, "application/java-archive")
+        ghRelease.uploadAsset(remapSourcesJar.archiveFile.get().asFile, "application/java-archive")
         ghRelease.uploadAsset(javadocJar.outputs.files.singleFile, "application/java-archive")
     }
 }
