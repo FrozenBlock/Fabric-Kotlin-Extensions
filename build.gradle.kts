@@ -314,6 +314,9 @@ modrinth {
     uploadFile.set(file("build/libs/${tasks.jar.get().archiveBaseName.get()}-${version}.jar"))
     gameVersions.set(supportedMcVersions)
     loaders.set(listOf("fabric", "quilt"))
+    dependencies {
+        required.project("fabric-language-kotlin")
+    }
 }
 
 
