@@ -51,7 +51,7 @@ version = getVersion()
 group = mavenGroup
 
 val supportedMcVersions: List<String> = listOf(
-    "26.1-snapshot-1"
+    "26.1-rc-3", "26.1-rc-2", "26.1-rc-1", "26.1-snapshot-1"
 )
 
 val includeApi: Configuration by configurations.creating
