@@ -8,7 +8,7 @@ plugins {
     `java-library`
     java
     id("com.gradleup.shadow") version("+")
-    kotlin("jvm") version("2.3.0")
+    kotlin("jvm") version("2.3.10")
 }
 
 val modId: String by project
