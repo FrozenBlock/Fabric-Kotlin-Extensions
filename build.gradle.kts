@@ -1,3 +1,6 @@
+import com.matthewprenger.cursegradle.CurseArtifact
+import com.matthewprenger.cursegradle.CurseProject
+import com.matthewprenger.cursegradle.CurseRelation
 import groovy.xml.XmlSlurper
 import org.codehaus.groovy.runtime.ResourceGroovyMethods
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
@@ -23,6 +26,7 @@ buildscript {
 plugins {
     id("net.fabricmc.fabric-loom") version("1.16-SNAPSHOT")
     id("org.ajoberstar.grgit") version("+")
+    id("com.matthewprenger.cursegradle") version("+")
     id("com.modrinth.minotaur") version("+")
     `maven-publish`
     eclipse
@@ -68,6 +72,13 @@ configurations {
 
 repositories {
     maven("https://jitpack.io")
+    maven {
+        setUrl("https://cursemaven.com")
+
+        content {
+            includeGroup("curse.maven")
+        }
+    }
     mavenCentral()
 }
 
@@ -263,7 +274,9 @@ extra {
 }
 
 val modrinth_id: String by extra
+val curseforge_id: String by extra
 val release_type: String by extra
+val curseforge_minecraft_version: String by extra
 val changelog_file: String by extra
 
 val modrinthVersion = makeModrinthVersion(modVersion)
@@ -301,6 +314,36 @@ fun getBranch(): String {
 
     branch = grgit.branch.current().name
     return branch.substring(branch.lastIndexOf("/") + 1)
+}
+
+curseforge {
+    val token = System.getenv("CURSEFORGE_TOKEN")
+    apiKey = if (token == null || token.isEmpty()) "unset" else token
+    val gameVersion = if (curseforge_minecraft_version != "null") curseforge_minecraft_version else minecraftVersion
+    project(closureOf<CurseProject> {
+        id = curseforge_id
+        changelog = changelogText
+        releaseType = release_type
+        addGameVersion("Fabric")
+        addGameVersion("Quilt")
+        addGameVersion(gameVersion)
+        relations(closureOf<CurseRelation> {
+            requiredDependency("fabric-api")
+            optionalDependency("cloth-config")
+        })
+        mainArtifact(jar, closureOf<CurseArtifact> {
+            this.displayName = displayName
+        })
+        addArtifact(sourcesJar)
+        addArtifact(javadocJar)
+
+        afterEvaluate {
+            uploadTask.dependsOn(jar)
+            uploadTask.dependsOn(sourcesJar)
+            uploadTask.dependsOn(javadocJar)
+        }
+    })
+    curseGradleOptions.forgeGradleIntegration = false
 }
 
 modrinth {
@@ -348,5 +391,6 @@ val github by tasks.register("github") {
 val publishMod by tasks.register("publishMod") {
     dependsOn(tasks.publish)
     dependsOn(github)
+    dependsOn(tasks.curseforge)
     dependsOn(tasks.modrinth)
 }
