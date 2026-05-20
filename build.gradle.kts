@@ -345,7 +345,7 @@ publishMods {
         version.set(modrinthVersion)
         repository.set("FrozenBlock/Fabric-Kotlin-Extensions")
         accessToken.set(providers.environmentVariable("GITHUB_TOKEN"))
-        commitish.set("main")
+        commitish.set(getBranch())
     }
 }
 
