@@ -21,7 +21,7 @@ buildscript {
 }
 
 plugins {
-    id("net.fabricmc.fabric-loom") version("1.14-SNAPSHOT")
+    id("net.fabricmc.fabric-loom") version("1.16-SNAPSHOT")
     id("org.ajoberstar.grgit") version("+")
     id("com.modrinth.minotaur") version("+")
     `maven-publish`
@@ -29,7 +29,7 @@ plugins {
     idea
     `java-library`
     java
-    kotlin("jvm") version("2.3.10")
+    kotlin("jvm") version("2.3.21")
 }
 
 val minecraftVersion: String by project
@@ -51,7 +51,8 @@ version = getVersion()
 group = mavenGroup
 
 val supportedMcVersions: List<String> = listOf(
-    "26.1-rc-3", "26.1-rc-2", "26.1-rc-1", "26.1-snapshot-1"
+    "26.2-snapshot-7",
+    "26.1.2", "26.1.1", "26.1"
 )
 
 val includeApi: Configuration by configurations.creating
@@ -67,8 +68,6 @@ configurations {
 
 repositories {
     maven("https://jitpack.io")
-    maven("https://maven.parchmentmc.org")
-    maven("https://maven.quiltmc.org/repository/release")
     mavenCentral()
 }
 
