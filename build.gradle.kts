@@ -316,7 +316,7 @@ publishMods {
     changelog.set(changelogText)
     type.set(STABLE)
     modLoaders.add("fabric")
-    additionalFiles.from(sourcesJar.archiveFile, javadocJar.archiveFile)
+    //additionalFiles.from(sourcesJar.archiveFile, javadocJar.archiveFile)
 
     curseforge {
         version.set(modrinthVersion)
