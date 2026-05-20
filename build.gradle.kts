@@ -231,8 +231,6 @@ publishing {
             create<MavenPublication>("mavenJava") {
                 from(components["java"])
 
-                artifact(javadocJar)
-
                 pom {
                     groupId = publishGroup
                     artifactId = rootProject.base.archivesName.get().lowercase()
