@@ -1,6 +1,3 @@
-import com.matthewprenger.cursegradle.CurseArtifact
-import com.matthewprenger.cursegradle.CurseProject
-import com.matthewprenger.cursegradle.CurseRelation
 import groovy.xml.XmlSlurper
 import org.codehaus.groovy.runtime.ResourceGroovyMethods
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
@@ -26,8 +23,7 @@ buildscript {
 plugins {
     id("net.fabricmc.fabric-loom") version("1.16-SNAPSHOT")
     id("org.ajoberstar.grgit") version("+")
-    id("com.matthewprenger.cursegradle") version("+")
-    id("com.modrinth.minotaur") version("+")
+    id("me.modmuss50.mod-publish-plugin") version("+")
     `maven-publish`
     eclipse
     idea
@@ -316,81 +312,38 @@ fun getBranch(): String {
     return branch.substring(branch.lastIndexOf("/") + 1)
 }
 
-curseforge {
-    val token = System.getenv("CURSEFORGE_TOKEN")
-    apiKey = if (token == null || token.isEmpty()) "unset" else token
-    val gameVersion = if (curseforge_minecraft_version != "null") curseforge_minecraft_version else minecraftVersion
-    project(closureOf<CurseProject> {
-        id = curseforge_id
-        changelog = changelogText
-        releaseType = release_type
-        addGameVersion("Fabric")
-        addGameVersion("Quilt")
-        addGameVersion(gameVersion)
-        relations(closureOf<CurseRelation> {
-            requiredDependency("fabric-api")
-            optionalDependency("cloth-config")
-        })
-        mainArtifact(jar, closureOf<CurseArtifact> {
-            this.displayName = displayName
-        })
-        addArtifact(sourcesJar)
-        addArtifact(javadocJar)
-
-        afterEvaluate {
-            uploadTask.dependsOn(jar)
-            uploadTask.dependsOn(sourcesJar)
-            uploadTask.dependsOn(javadocJar)
-        }
-    })
-    curseGradleOptions.forgeGradleIntegration = false
-}
-
-modrinth {
-    token.set(System.getenv("MODRINTH_TOKEN"))
-    projectId.set(modrinth_id)
-    versionNumber.set(modrinthVersion)
-    versionName.set(displayName)
-    versionType.set(release_type)
+publishMods {
+    version.set(modrinthVersion)
+    file.set(jar.archiveFile)
     changelog.set(changelogText)
-    uploadFile.set(file("build/libs/${tasks.jar.get().archiveBaseName.get()}-${version}.jar"))
-    gameVersions.set(supportedMcVersions)
-    loaders.set(listOf("fabric", "quilt"))
-    dependencies {
-        required.project("fabric-language-kotlin")
+    type.set(STABLE)
+    modLoaders.add("fabric")
+    additionalFiles.from(sourcesJar.archiveFile, javadocJar.archiveFile)
+
+    curseforge {
+        version.set(modrinthVersion)
+        projectId.set(curseforge_id)
+        projectSlug.set("fabric-kotlin-extensions")
+        accessToken.set(providers.environmentVariable("CURSEFORGE_TOKEN"))
+        minecraftVersions.addAll(supportedMcVersions)
+        requires("fabric-language-kotlin")
     }
-}
-
-
-val github by tasks.register("github") {
-    dependsOn(jar)
-    val env = System.getenv()
-    val token = env["GITHUB_TOKEN"]
-    val repoVar = env["GITHUB_REPOSITORY"]
-    onlyIf {
-        token != null && token != ""
+    modrinth {
+        version.set(modrinthVersion)
+        projectId.set(modrinth_id)
+        accessToken.set(providers.environmentVariable("MODRINTH_TOKEN"))
+        minecraftVersions.addAll(supportedMcVersions)
+        requires("fabric-language-kotlin")
     }
-
-    doLast {
-        val github = GitHub.connectUsingOAuth(token)
-        val repository = github.getRepository(repoVar)
-
-        val releaseBuilder = GHReleaseBuilder(repository, makeModrinthVersion(modVersion))
-        releaseBuilder.name(makeName(modVersion))
-        releaseBuilder.body(changelogText)
-        releaseBuilder.commitish(getBranch())
-        releaseBuilder.prerelease(release_type != "release")
-
-        val ghRelease = releaseBuilder.create()
-        ghRelease.uploadAsset(jar.archiveFile.get().asFile, "application/java-archive")
-        ghRelease.uploadAsset(sourcesJar.archiveFile.get().asFile, "application/java-archive")
-        ghRelease.uploadAsset(javadocJar.outputs.files.singleFile, "application/java-archive")
+    github {
+        version.set(modrinthVersion)
+        repository.set("FrozenBlock/Fabric-Kotlin-Extensions")
+        accessToken.set(providers.environmentVariable("GITHUB_TOKEN"))
+        commitish.set("main")
     }
 }
 
 val publishMod by tasks.register("publishMod") {
     dependsOn(tasks.publish)
-    dependsOn(github)
-    dependsOn(tasks.curseforge)
-    dependsOn(tasks.modrinth)
+    dependsOn(tasks.publishMods)
 }
