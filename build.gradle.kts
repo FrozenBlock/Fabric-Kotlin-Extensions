@@ -277,6 +277,14 @@ val modrinthVersion = makeModrinthVersion(modVersion)
 val displayName = makeName(modVersion)
 val changelogText = getChangelog(file(changelog_file))
 
+// CURSEFORGE HOTFIX BECAUSE CURSEFORGE DOESN'T SUPPORT 26.2 SNAPSHOTS
+val cfSupportedMcVersions = supportedMcVersions.map { ver ->
+    if (ver == "26.2-snapshot-7") {
+        return@map "26.1-snapshot"
+    }
+    ver
+}
+
 fun makeName(version: String): String {
     return version
     //return "$version (${minecraftVersion})"
@@ -323,7 +331,7 @@ publishMods {
         projectId.set(curseforge_id)
         projectSlug.set("fabric-kotlin-extensions")
         accessToken.set(providers.environmentVariable("CURSEFORGE_TOKEN"))
-        minecraftVersions.addAll(supportedMcVersions)
+        minecraftVersions.addAll(cfSupportedMcVersions)
         requires("fabric-language-kotlin")
     }
     modrinth {
