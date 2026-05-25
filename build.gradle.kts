@@ -2,23 +2,12 @@ import groovy.xml.XmlSlurper
 import org.codehaus.groovy.runtime.ResourceGroovyMethods
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import org.kohsuke.github.GHReleaseBuilder
-import org.kohsuke.github.GitHub
 import java.io.FileInputStream
 import java.io.FileNotFoundException
 import java.net.URL
 import java.nio.file.Files
 import java.util.*
 import kotlin.collections.HashMap
-
-buildscript {
-    repositories {
-        gradlePluginPortal()
-    }
-    dependencies {
-        classpath("org.kohsuke:github-api:+")
-    }
-}
 
 plugins {
     id("net.fabricmc.fabric-loom") version("1.16-SNAPSHOT")
@@ -346,6 +335,7 @@ publishMods {
         repository.set("FrozenBlock/Fabric-Kotlin-Extensions")
         accessToken.set(providers.environmentVariable("GITHUB_TOKEN"))
         commitish.set(getBranch())
+        additionalFiles.from(sourcesJar.archiveFile.get().asFile, javadocJar.archiveFile.get().asFile)
     }
 }
 
