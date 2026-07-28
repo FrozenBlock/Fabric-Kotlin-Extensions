@@ -269,8 +269,8 @@ val changelogText = getChangelog(file(changelog_file))
 
 // CURSEFORGE HOTFIX BECAUSE CURSEFORGE DOESN'T SUPPORT 26.2 SNAPSHOTS
 val cfSupportedMcVersions = supportedMcVersions.map { ver ->
-    if (ver == "26.2-snapshot-7") {
-        return@map "26.1-snapshot"
+    if (ver == "26.3-snapshot-5") {
+        return@map "26.2-snapshot"
     }
     ver
 }
@@ -340,6 +340,9 @@ publishMods {
         commitish.set(getBranch())
         additionalFiles.from(sourcesJar.archiveFile.get().asFile, javadocJar.archiveFile.get().asFile)
     }
+}
+tasks.named("publishGithub") {
+    dependsOn(jar, sourcesJar, javadocJar)
 }
 
 val publishMod by tasks.register("publishMod") {
