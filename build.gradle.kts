@@ -317,6 +317,8 @@ publishMods {
     //additionalFiles.from(sourcesJar.archiveFile, javadocJar.archiveFile)
 
     curseforge {
+        client = true
+        server = true
         version.set(modrinthVersion)
         projectId.set(curseforge_id)
         projectSlug.set("fabric-kotlin-extensions")
