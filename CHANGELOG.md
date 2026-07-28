@@ -5,6 +5,5 @@ Make sure to clear after release
 Put changelog here:
 
 -----------------
-- Added temporary mod icon
-- Updated to Kotlin 2.3.21
-- Updated minimum FLK to 1.13.11+kotlin.2.3.21
+- Updated to Kotlin 2.4.10
+- Updated minimum FLK to 1.13.13+kotlin.2.4.10

@@ -10,7 +10,7 @@ import java.util.*
 import kotlin.collections.HashMap
 
 plugins {
-    id("net.fabricmc.fabric-loom") version("1.16-SNAPSHOT")
+    id("net.fabricmc.fabric-loom") version("1.17-SNAPSHOT")
     id("org.ajoberstar.grgit") version("+")
     id("me.modmuss50.mod-publish-plugin") version("+")
     `maven-publish`
@@ -18,7 +18,7 @@ plugins {
     idea
     `java-library`
     java
-    kotlin("jvm") version("2.3.21")
+    kotlin("jvm") version("2.4.10")
 }
 
 val minecraftVersion: String by project
@@ -40,7 +40,8 @@ version = getVersion()
 group = mavenGroup
 
 val supportedMcVersions: List<String> = listOf(
-    "26.2-snapshot-7",
+    "26.3-snapshot-5",
+    "26.2",
     "26.1.2", "26.1.1", "26.1"
 )
 
