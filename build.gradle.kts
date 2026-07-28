@@ -270,7 +270,7 @@ val changelogText = getChangelog(file(changelog_file))
 // CURSEFORGE HOTFIX BECAUSE CURSEFORGE DOESN'T SUPPORT 26.2 SNAPSHOTS
 val cfSupportedMcVersions = supportedMcVersions.map { ver ->
     if (ver == "26.3-snapshot-5") {
-        return@map "26.2-snapshot"
+        return@map "26.1-snapshot"
     }
     ver
 }
