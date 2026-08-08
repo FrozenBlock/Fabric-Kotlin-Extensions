@@ -1,2 +1,2 @@
-# Fabric-Kotlin-Extensions
+# Ethan's Kotlin Extensions
 Contains Kotlin libraries not included by Fabric Language Kotlin

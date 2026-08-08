@@ -13,7 +13,7 @@ pluginManagement {
     }
 }
 
-rootProject.name = "Fabric Kotlin Extensions"
+rootProject.name = "Ethan's Kotlin Extensions"
 
 includeBuild("library") {
     dependencySubstitution {

@@ -1,0 +1,33 @@
+modLoader="klf"
+loaderVersion="[1,)"
+license="MIT"
+issueTrackerURL="https://github.com/FrozenBlock/Ethans-Kotlin-Extensions/issues"
+
+[[mods]]
+modId="${modId}"
+version="${version}"
+displayName="Ethan's Kotlin Extensions"
+description="Adds additional Kotlin libraries."
+authors="FrozenBlock"
+logoFile="FKE.png"
+
+[[dependencies.'${modId}']]
+    modId="neoforge"
+    type="required"
+    versionRange="[1,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.'${modId}']]
+    modId="klf"
+    type="required"
+    versionRange="[1,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.'${modId}']]
+    modId="minecraft"
+    type="required"
+    versionRange="[1,)"
+    ordering="NONE"
+    side="BOTH"

@@ -3,7 +3,7 @@
   "id": "${modId}",
   "version": "${version}",
 
-  "name": "Fabric Kotlin Extensions",
+  "name": "Ethan's Kotlin Extensions",
   "description": "Adds additional Kotlin libraries.",
   "authors": [
     "FrozenBlock"

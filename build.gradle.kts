@@ -313,29 +313,53 @@ publishMods {
     file.set(jar.archiveFile)
     changelog.set(changelogText)
     type.set(STABLE)
-    modLoaders.add("fabric")
     //additionalFiles.from(sourcesJar.archiveFile, javadocJar.archiveFile)
 
-    curseforge {
+    val cfOptions = curseforgeOptions {
         client = true
         server = true
         version.set(modrinthVersion)
         projectId.set(curseforge_id)
-        projectSlug.set("fabric-kotlin-extensions")
+        projectSlug.set("ethans-kotlin-extensions")
         accessToken.set(providers.environmentVariable("CURSEFORGE_TOKEN"))
         minecraftVersions.addAll(cfSupportedMcVersions)
-        requires("fabric-language-kotlin")
     }
-    modrinth {
+    val mrOptions = modrinthOptions {
         version.set(modrinthVersion)
         projectId.set(modrinth_id)
         accessToken.set(providers.environmentVariable("MODRINTH_TOKEN"))
         minecraftVersions.addAll(supportedMcVersions)
+    }
+
+    curseforge("curseforgeFabric") {
+        from(cfOptions)
+        version.set("$modrinthVersion-fabric")
+        modLoaders.add("fabric")
         requires("fabric-language-kotlin")
     }
+    curseforge("curseforgeNeoForge") {
+        from(cfOptions)
+        version.set("$modrinthVersion-neoforge")
+        modLoaders.add("neoforge")
+        requires("kotlinlangforge")
+    }
+
+    modrinth("modrinthFabric") {
+        from(mrOptions)
+        version.set("$modrinthVersion-fabric")
+        modLoaders.add("fabric")
+        requires("fabric-language-kotlin")
+    }
+    modrinth("modrinthNeoForge") {
+        from(mrOptions)
+        version.set("$modrinthVersion-neoforge")
+        modLoaders.add("neoforge")
+        requires("kotlin-lang-forge")
+    }
+
     github {
         version.set(modrinthVersion)
-        repository.set("FrozenBlock/Fabric-Kotlin-Extensions")
+        repository.set("FrozenBlock/Ethans-Kotlin-Extensions")
         accessToken.set(providers.environmentVariable("GITHUB_TOKEN"))
         commitish.set(getBranch())
         additionalFiles.from(sourcesJar.archiveFile.get().asFile, javadocJar.archiveFile.get().asFile)
