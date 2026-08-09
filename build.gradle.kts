@@ -161,7 +161,7 @@ java {
 tasks {
     jar {
         from("LICENSE") {
-            rename { "${it}_${base.archivesName}"}
+            rename { "${it}_${base.archivesName.get()}"}
         }
     }
 }
