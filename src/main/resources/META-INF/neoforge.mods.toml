@@ -19,13 +19,6 @@ logoFile="FKE.png"
     side="BOTH"
 
 [[dependencies.'${modId}']]
-    modId="klf"
-    type="required"
-    versionRange="[1,)"
-    ordering="NONE"
-    side="BOTH"
-
-[[dependencies.'${modId}']]
     modId="minecraft"
     type="required"
     versionRange="[1,)"
